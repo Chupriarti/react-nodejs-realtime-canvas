@@ -2,7 +2,7 @@ import React from 'react';
 
 const Canvas = () => {
   return (
-    <div>
+    <div className='canvas'>
       Canvas
     </div>
   )

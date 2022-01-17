@@ -2,7 +2,7 @@ import React from 'react';
 
 const SettingBar = () => {
   return (
-    <div>
+    <div className='toolbar'>
       SettingBar
     </div>
   )
