@@ -1,3 +1,5 @@
+@import './variables.scss';
+
 * {
     margin: 0;
     padding: 0;
@@ -8,5 +10,5 @@
     height: 100vh;
     max-height: 100vh;
     width: vw;
-    background-color: #F6F6F6;
+    background-color: $background-color;
 }
