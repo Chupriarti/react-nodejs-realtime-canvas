@@ -3,7 +3,7 @@ import React from 'react';
 const Canvas = () => {
   return (
     <div className='canvas'>
-      Canvas
+      <canvas widht={400} height={400}></canvas>
     </div>
   )
 }
