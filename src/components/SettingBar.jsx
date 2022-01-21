@@ -14,6 +14,12 @@ const SettingBar = () => {
         defaultValue={1} 
         min={1} 
         max={50} />
+      <label htmlFor="line-width">Line width</label>
+      <input
+        id="stroke-color"
+        type="color"
+        onChange={e => toolState.setStrokeColor(e.target.value)} 
+      />
     </div>
   )
 }
