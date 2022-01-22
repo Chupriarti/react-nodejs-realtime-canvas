@@ -14,7 +14,7 @@ const Canvas = observer( () => {
   }, []);
 
   const mouseDownHandler = () => {
-    canvasState.pushToUndo(canvasRef.current.toDataUrl());
+    canvasState.pushToUndo(canvasRef.current.toDataURL());
   }
 
   return (
