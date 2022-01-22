@@ -12,6 +12,14 @@ class CanvasState {
     setCanvas(canvas) {
         this.canvas = canvas;
     }
+
+    pushToUndo (data) {
+        this.undoList.push(data);
+    }
+
+    pushToRedo (data) {
+        this.redoList.push(data);
+    }
 }
 
 export default new CanvasState();
