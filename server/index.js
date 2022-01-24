@@ -6,6 +6,10 @@ const PORT = process.env.PORT || 5000;
 
 app.ws('/', (ws, req) => {
     console.log("Connection is complete");
+    ws.send("You have connected");
+    ws.on("message", (msg) => {
+        console.log(msg);
+    })
 });
 
 app.listen(PORT, () => {console.log(`server started on PORT ${PORT}`)});
