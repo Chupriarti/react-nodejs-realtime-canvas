@@ -8,8 +8,17 @@ app.ws('/', (ws, req) => {
     console.log("Connection is complete");
     ws.send("You have connected");
     ws.on("message", (msg) => {
-        console.log(msg);
+        switch(msg.method) {
+            case "connection":
+                connectionHandler(ws, msg);
+                break;
+        }
     })
 });
 
 app.listen(PORT, () => {console.log(`server started on PORT ${PORT}`)});
+
+const connectionHandler = (ws, msg) => {
+    msg = JSON.parse(msg);
+    ws.id = msg.id;
+}
