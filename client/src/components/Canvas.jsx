@@ -16,6 +16,13 @@ const Canvas = observer( () => {
     toolState.setTool(new Brush(canvasRef.current));
   }, []);
 
+  React.useEffect(() => {
+    const socket = WebSocket('ws://localhost:5000/');
+    socket.onopen = () => {
+      console.log("Connected to websocket");
+    }
+  }, []);
+
   const mouseDownHandler = () => {
     canvasState.pushToUndo(canvasRef.current.toDataURL());
   }
