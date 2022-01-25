@@ -19,16 +19,21 @@ const Canvas = observer( () => {
   }, []);
 
   React.useEffect(() => {
-    const socket = new WebSocket('ws://localhost:5000/');
-    socket.onopen = () => {
-      console.log("Connected to websocket");
-      socket.send(JSON.stringify({
-        id: params.id,
-        username: canvasState.username,
-        method: "connection"
-      }));
+    if (canvasState.username){
+      const socket = new WebSocket('ws://localhost:5000/');
+      socket.onopen = () => {
+        console.log("Connected to websocket");
+        socket.send(JSON.stringify({
+          id: params.id,
+          username: canvasState.username,
+          method: "connection"
+        }));
+      }
+      socket.onmessage = (event) => {
+        console.log(event.data);
+      }
     }
-  }, []);
+  }, [canvasState.username]);
 
   const mouseDownHandler = () => {
     canvasState.pushToUndo(canvasRef.current.toDataURL());
