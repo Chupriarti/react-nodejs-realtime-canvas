@@ -5,11 +5,13 @@ import toolState from '../store/toolState';
 import '../styles/canvas.scss';
 import Brush from '../tools/Brush';
 import {Modal, Button} from 'react-bootstrap'
+import {useParams} from 'react-router-dom';
 
 const Canvas = observer( () => {
   const canvasRef = React.useRef();
   const usernameRef = React.useRef();
   const [modal, setModal] = React.useState(true);
+  const params = useParams();
 
   React.useEffect(() => {
     canvasState.setCanvas(canvasRef.current);
@@ -20,6 +22,11 @@ const Canvas = observer( () => {
     const socket = new WebSocket('ws://localhost:5000/');
     socket.onopen = () => {
       console.log("Connected to websocket");
+      socket.send(JSON.stringify({
+        id: params.id,
+        username: canvasState.username,
+        method: "connection"
+      }));
     }
   }, []);
 
