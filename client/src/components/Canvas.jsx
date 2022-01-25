@@ -9,6 +9,7 @@ import {Modal, Button} from 'react-bootstrap'
 const Canvas = observer( () => {
   const canvasRef = React.useRef();
   const usernameRef = React.useRef();
+  const [modal, setModal] = React.useState(true);
 
   React.useEffect(() => {
     canvasState.setCanvas(canvasRef.current);
@@ -21,11 +22,12 @@ const Canvas = observer( () => {
 
   const connectionHandler = () => {
     canvasState.setUsername(usernameRef.current.value);
+    setModal(false);
   }
 
   return (
     <div className='canvas'>
-      <Modal show={true} onHide={() => {}}>
+      <Modal show={modal} onHide={() => {}}>
         <Modal.Header>
           <Modal.Title>Enter your name</Modal.Title>
         </Modal.Header>
