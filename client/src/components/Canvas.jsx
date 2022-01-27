@@ -15,7 +15,6 @@ const Canvas = observer( () => {
 
   React.useEffect(() => {
     canvasState.setCanvas(canvasRef.current);
-    toolState.setTool(new Brush(canvasRef.current));
   }, []);
 
   React.useEffect(() => {
@@ -23,6 +22,7 @@ const Canvas = observer( () => {
       const socket = new WebSocket('ws://localhost:5000/');
       canvasState.setSocket(socket);
       canvasState.setSessionId(params.id);
+      toolState.setTool(new Brush(canvasRef.current, socket, params.id));
       socket.onopen = () => {
         console.log("Connected to websocket");
         socket.send(JSON.stringify({
@@ -46,7 +46,13 @@ const Canvas = observer( () => {
   }, [canvasState.username]);
 
   const drawHandler = (msg) => {
-    
+    const figure = msg.figure;
+    const ctx = canvasRef.current.getContext("2d");
+    switch (figure.type){
+      case "brush":
+        Brush.draw(ctx, figure.x, figure.y);
+        break;
+    }
   }
 
   const mouseDownHandler = () => {
