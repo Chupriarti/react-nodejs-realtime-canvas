@@ -12,11 +12,11 @@ class CanvasState {
         makeAutoObservable(this);
     }
 
-    setSocket(socket){
+    setSocket(socket) {
         this.socket = socket;
     }
 
-    setSessionId(id){
+    setSessionId(id) {
         this.sessionid = id;
     }
 
