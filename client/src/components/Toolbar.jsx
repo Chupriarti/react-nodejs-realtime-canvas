@@ -17,8 +17,8 @@ const Toolbar = () => {
 
   return (
     <div className='toolbar'>
-      <button className='toolbar__btn brush' onClick={() => toolState(new Brush(canvasState.canvas))} />
-      <button className='toolbar__btn rect' onClick={() => toolState(new Rect(canvasState.canvas))} />
+      <button className='toolbar__btn brush' onClick={() => toolState(new Brush(canvasState.canvas, canvasState.socket, canvasState.sessionid))} />
+      <button className='toolbar__btn rect' onClick={() => toolState(new Rect(canvasState.canvas, canvasState.socket, canvasState.sessionid))} />
       <button className='toolbar__btn circle' onClick={() => toolState(new Circle(canvasState.canvas))} />
       <button className='toolbar__btn eraser' onClick={() => toolState(new Eraser(canvasState.canvas))}  />
       <button className='toolbar__btn line'  onClick={() => toolState(new Line(canvasState.canvas))} />
