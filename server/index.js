@@ -23,6 +23,14 @@ app.ws('/', (ws, req) => {
     })
 });
 
+app.post('/image', (req, res) => {
+
+});
+
+app.get('/image', (req, res) => {
+
+});
+
 app.listen(PORT, () => {console.log(`server started on PORT ${PORT}`)});
 
 const connectionHandler = (ws, msg) => {
