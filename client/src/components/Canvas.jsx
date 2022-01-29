@@ -6,6 +6,8 @@ import '../styles/canvas.scss';
 import Brush from '../tools/Brush';
 import {Modal, Button} from 'react-bootstrap'
 import {useParams} from 'react-router-dom';
+import Rect from '../tools/Rect';
+import axios from 'axios';
 
 const Canvas = observer( () => {
   const canvasRef = React.useRef();
@@ -15,6 +17,16 @@ const Canvas = observer( () => {
 
   React.useEffect(() => {
     canvasState.setCanvas(canvasRef.current);
+    let ctx = canvasRef.current.getContext('2d')
+    axios.get(`http://localhost:5000/image?id=${params.id}`)
+        .then(response => {
+            const img = new Image();
+            img.src = response.data;
+            img.onload = () => {
+                ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+                ctx.drawImage(img, 0, 0, canvasRef.current.width, canvasRef.current.height);
+            }
+        });
   }, []);
 
   React.useEffect(() => {
@@ -52,6 +64,9 @@ const Canvas = observer( () => {
       case "brush":
         Brush.draw(ctx, figure.x, figure.y);
         break;
+      case "rect":
+        Rect.draw(ctx, figure.x, figure.y, figure.width, figure.height, figure.color);
+        break;
       case "finish":
         ctx.beginPath();
         break;
@@ -60,6 +75,8 @@ const Canvas = observer( () => {
 
   const mouseDownHandler = () => {
     canvasState.pushToUndo(canvasRef.current.toDataURL());
+    axios.post(`http://localhost:5000/image?id=${params.id}`, {img: canvasRef.current.toDataURL()})
+      .then(response => console.log("Send image to server"));
   }
 
   const connectionHandler = () => {
