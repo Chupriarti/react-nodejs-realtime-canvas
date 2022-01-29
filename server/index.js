@@ -25,11 +25,21 @@ app.ws('/', (ws, req) => {
 });
 
 app.post('/image', (req, res) => {
-
+    try {
+         
+    } catch (e){
+        console.error("post inage error: ", e);
+        return res.status(500).json("post inage error");
+    }
 });
 
 app.get('/image', (req, res) => {
-
+    try {
+         
+    } catch (e){
+        console.error("get inage error: ", e);
+        return res.status(500).json("get inage error");
+    }
 });
 
 app.listen(PORT, () => {console.log(`server started on PORT ${PORT}`)});
