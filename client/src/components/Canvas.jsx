@@ -75,7 +75,7 @@ const Canvas = observer( () => {
 
   const mouseDownHandler = () => {
     canvasState.pushToUndo(canvasRef.current.toDataURL());
-    axios.post(`http://localhost:5000/image?=${params.id}`, {img: canvasRef.current.toDataURL()})
+    axios.post(`http://localhost:5000/image?id=${params.id}`, {img: canvasRef.current.toDataURL()})
       .then(response => console.log("Send image to server"));
   }
 
